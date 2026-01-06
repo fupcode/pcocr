@@ -17,7 +17,7 @@ def get_ocr():
 
 @router.post("")
 @router.post("/")
-async def post_ocr(file: UploadFile = File(...), type: str = Form(...)):
+async def post_ocr(file: UploadFile = File(...), color: str = Form(...)):
     # 读取文件内容
     contents = await file.read()
 
@@ -26,7 +26,7 @@ async def post_ocr(file: UploadFile = File(...), type: str = Form(...)):
 
     # 使用OCR进行图片识别
     try:
-        anchors = await ocr_service.ocr_image(image, type)
+        anchors = await ocr_service.ocr_image(image, color)
     except Exception as e:
         logger.error("OCR processing error: %s", str(e))
         raise HTTPException(status_code=500, detail="OCR processing failed.")

@@ -64,10 +64,13 @@ def postprocess_ocr_result(ocr_results, image_size, score_threshold=0.0):
         position = item.get("position", None)
 
         if position is not None:
-            # 将四点坐标转成相对坐标
-            box = (position / np.array([width, height], dtype=np.float32)).tolist()
+            rel_pos = position / np.array([width, height], dtype=np.float32)
+            box = [
+                {"x": float(x), "y": float(y)}
+                for x, y in rel_pos
+            ]
         else:
-            box = [[0, 0], [0, 0], [0, 0], [0, 0]]
+            box = [{"x": 0.0, "y": 0.0} for _ in range(4)]
 
         processed.append({
             "subtext": subtext,

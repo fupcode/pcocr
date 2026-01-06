@@ -7,16 +7,17 @@ import numpy as np
 ocr_model = CnOcr(rec_model_name="scene-densenet_lite_136-gru", det_model_name="ch_PP-OCRv3_det")
 
 
-async def ocr_image(image: ImageFile.ImageFile, type: str):
+async def ocr_image(image: ImageFile.ImageFile, color: str):
     """
     使用 cnocr 识别图像中的文字
+    :param color:
     :param image: PIL Image
     :return: 识别结果列表
     """
 
     # 预处理图像，过滤白色文字
     img_arr_original = np.array(image.convert("RGB"), dtype=np.uint8)
-    if type == "white":
+    if color == "white":
         img_arr = filter_white_text(img_arr_original)
     else:
         img_arr = image
