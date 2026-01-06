@@ -9,13 +9,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-@router.get("")
 @router.get("/")
 def get_ocr():
     return {"message": "Send a POST request to this URL to recognize the image."}
 
 
-@router.post("")
 @router.post("/")
 async def post_ocr(file: UploadFile = File(...), color: str = Form(...)):
     # 读取文件内容
