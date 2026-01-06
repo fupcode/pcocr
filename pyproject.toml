@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=65.5.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pcocr"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "gunicorn",
+    "python-multipart",
+    "cnocr[ort-cpu]",
+    "pillow",
+    "onnxruntime",
+]
+
+[[tool.uv.index]]
+name = "aliyun"
+url = "http://mirrors.cloud.aliyuncs.com/pypi/simple/" # 内网
